@@ -26,47 +26,58 @@ public class FilaController {
 
     @GetMapping
     @ResponseBody
-    public ResponseEntity<Object> getFila() throws Exception {
-        Integer[] lista = filaService.getFila();
-        var inicio = filaService.inicio();
-        var fim = filaService.fim();
-        System.out.println("GET FILA");
+    public ResponseEntity<Object> getFila() {
+        try {
 
-        Map<String, Object> response = new HashMap<>();
-        response.put("lista", lista);
-        response.put("inicio", inicio);
-        response.put("fim", fim);
+            Integer[] lista = filaService.getFila();
+            var inicio = filaService.inicio();
+            var fim = filaService.fim();
 
-        return ResponseEntity.ok().body(response);
+            Map<String, Object> response = new HashMap<>();
+            response.put("lista", lista);
+            response.put("inicio", inicio);
+            response.put("fim", fim);
+
+            return ResponseEntity.ok().body(response);
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body("Fila vazia");
+        }
     }
 
     @PostMapping("/queue")
-    public ResponseEntity<Object> queue(@RequestBody QueueDTO queueDTO) throws Exception {
-        System.out.println("queue");
+    public ResponseEntity<Object> queue(@RequestBody QueueDTO queueDTO) {
+        try {
 
-        if (queueDTO.valor() == null) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Digite Corretamente");
+            if (queueDTO.valor() == null) {
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Digite Corretamente");
+            }
+
+            filaService.enfileirar(queueDTO.valor());
+            filaService.exibir();
+
+            return ResponseEntity.status(HttpStatus.CREATED).body("Empilhado com sucesso");
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body("Fila Cheia");
         }
 
-        filaService.enfileirar(queueDTO.valor());
-        filaService.exibir();
-
-        return ResponseEntity.status(HttpStatus.CREATED).body("Empilhado com sucesso");
     }
 
     @GetMapping("/unqueue")
     public ResponseEntity<Object> unqueue() throws Exception {
-        System.out.println("unqueue");
+        try {
 
-        var valor = filaService.desenfileirar();
-        filaService.exibir();
+            var valor = filaService.desenfileirar();
+            filaService.exibir();
 
-        return ResponseEntity.status(HttpStatus.OK).body(valor);
+            return ResponseEntity.status(HttpStatus.OK).body(valor);
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body("Fila Vazia");
+        }
+
     }
 
     @GetMapping("/{size}")
     public ResponseEntity<Object> setSize(@PathVariable Integer size) throws Exception {
-        System.out.println("size");
 
         FilaService.setCapacidade(size);
         return ResponseEntity.ok().body(size);

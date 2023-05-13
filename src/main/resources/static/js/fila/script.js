@@ -141,12 +141,11 @@ function getFilaAjax() {
         url: "/api/fila",
         type: 'GET',
         success: function (data, textStatus, xhr) {
-            console.log(data);
             fila = data.lista;
             drawFila(data.lista.length, data.lista, data.inicio, data.fim);
         },
         error: function (error) {
-            alert("getFilaAjax: Erro: " + error);
+            drawFila(0, [], 0, 0);
         }
     });
 }
@@ -174,7 +173,7 @@ function queueAjax(valor) {
             getFilaAjax();
         },
         error: function (error) {
-            alert("queueAjax: Erro: " + error);
+            log("Fila cheia");
         }
     });
 }
@@ -187,7 +186,7 @@ function unqueueAjax() {
             getFilaAjax();
         },
         error: function (error) {
-            alert("unqueueAjax: Erro: " + error);
+            log("Fila vazia");
         }
     });
 }

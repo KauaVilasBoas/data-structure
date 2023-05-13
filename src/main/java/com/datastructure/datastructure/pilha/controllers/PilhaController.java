@@ -27,32 +27,46 @@ public class PilhaController {
     @GetMapping
     @ResponseBody
     public ResponseEntity<Object> getPilha() throws Exception {
-        Integer[] lista = pilhaService.getPilha();
-        var topo = pilhaService.getTopo();
+        try {
+            var lista = pilhaService.getPilha();
+            var topo = pilhaService.getTopo();
 
-        Map<String, Object> response = new HashMap<>();
-        response.put("lista", lista);
-        response.put("topo", topo);
+            Map<String, Object> response = new HashMap<>();
+            response.put("lista", lista);
+            response.put("topo", topo);
 
-        return ResponseEntity.ok().body(response);
+            return ResponseEntity.ok().body(response);
+
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body("Pilha vazia");
+        }
     }
 
     @PostMapping("/push")
-    public ResponseEntity<Object> push(@RequestBody EmpilharDTO empilharDTO) throws Exception {
+    public ResponseEntity<Object> push(@RequestBody EmpilharDTO empilharDTO) {
 
-        if (empilharDTO.valor() == null) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Digite Corretamente");
+        try {
+
+            if (empilharDTO.valor() == null) {
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Digite Corretamente");
+            }
+            pilhaService.push(empilharDTO.valor());
+            return ResponseEntity.status(HttpStatus.CREATED).body("Empilhado com sucesso");
+
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body("Pilha Cheia");
         }
 
-        pilhaService.push(empilharDTO.valor());
-
-        return ResponseEntity.status(HttpStatus.CREATED).body("Empilhado com sucesso");
     }
 
     @GetMapping("/pop")
-    public ResponseEntity<Object> pop() throws Exception {
-        var valor = pilhaService.pop();
-        return ResponseEntity.status(HttpStatus.OK).body(valor);
+    public ResponseEntity<Object> pop() {
+        try {
+            var valor = pilhaService.pop();
+            return ResponseEntity.status(HttpStatus.OK).body(valor);
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body("Pilha vazia");
+        }
     }
 
     @GetMapping("/{size}")

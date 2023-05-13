@@ -27,7 +27,7 @@ public class PilhaService {
     };
 
     public Integer getTopo() throws Exception {
-        return pilha.topo();
+        return pilha.getTopo();
     };
 
     public Boolean vazia() throws Exception {
@@ -45,12 +45,16 @@ public class PilhaService {
         return elementosInteger;
     }
 
+    public Object[] getPilha12() throws Exception {
+       return pilha.getElementos();
+    }
+
     public static void setCapacidade(int capacidade) {
         PilhaService.capacidade = capacidade;
         pilha = new PilhaRepository<>(capacidade);
     }
 
-    public int topo() throws Exception {
-       return pilha.topo();
+    public void exibir() {
+        System.out.println(pilha.toString());
     }
 }

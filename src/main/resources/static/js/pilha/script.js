@@ -18,6 +18,7 @@ btnTamanho.addEventListener("click", function () {
         type: 'GET',
         success: function (data, textStatus, xhr) {
             getPilha();
+            log("Pilha de tamanho: " + data);
         },
         error: function (error) {
             alert("Erro: " + error);
@@ -37,26 +38,30 @@ btnEmpilhar.addEventListener("click", function () {
             getPilha();
         },
         error: function (error) {
-            alert("Erro: " + error);
+            // alert("Erro: " + error);
+            log("Pilha Cheia");
         }
     });
 });
 
 btnDesempilhar.addEventListener("click", function () {
+    console.log(topo);
     $.ajax({
         url: "/api/pilha/pop",
         type: 'GET',
         success: function (data, textStatus, xhr) {
             getPilha();
+            log("valor desimpilhado: " + data);
         },
         error: function (error) {
-            alert("Erro: " + error);
+            // alert("Erro: " + error);
+            log("Pilha vazia");
         }
     });
 });
 
 btnAleatorio.addEventListener("click", function () {
-  
+
     var valor = Math.floor(Math.random() * 100);
 
     $.ajax({
@@ -66,9 +71,11 @@ btnAleatorio.addEventListener("click", function () {
         contentType: "application/json",
         success: function (data, textStatus, xhr) {
             getPilha();
+            log("Valor aleatorio adicionado: " + valor);
         },
         error: function (error) {
-            alert("Erro: " + error);
+            // alert("Erro: " + error);
+            log("Pilha Cheia");
         }
     });
 });
@@ -81,12 +88,14 @@ function getPilha() {
             drawStack(data.lista.length, data.lista, data.topo);
         },
         error: function (error) {
-            alert("Erro: " + error);
+            drawStack(0, [], 0);
+            // alert("Erro: " + error);
+            // log("Pilha vazia");
         }
     });
 }
 
-function drawStack(size, pilhaArray) {
+function drawStack(size, pilhaArray, topo) {
     $("#tpilha").find('tbody')
         .empty()
         .append($('<tr>')
@@ -115,8 +124,6 @@ function drawStack(size, pilhaArray) {
                 )
             );
     }
-    topo = size - 1;
-    tamanho = size;
     $('#s' + topo).html('TOPO →');
 }
 

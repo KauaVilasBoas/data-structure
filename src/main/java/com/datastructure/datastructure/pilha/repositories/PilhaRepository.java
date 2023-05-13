@@ -1,5 +1,7 @@
 package com.datastructure.datastructure.pilha.repositories;
 
+import java.util.Arrays;
+
 public class PilhaRepository<T> implements IPilha<T> {
 
     private T[] elementos;
@@ -40,8 +42,18 @@ public class PilhaRepository<T> implements IPilha<T> {
         return elementos[topo];
     }
 
+    public int getTopo() throws Exception {
+        if (topo == -1)
+            throw new Exception("Pilha Vazia");
+        return topo;
+    }
+
     public T[] getElementos() {
         return elementos;
-    }   
-    
+    }
+
+    @Override
+    public String toString() {
+        return "PilhaRepository [elementos=" + Arrays.toString(elementos) + ", topo=" + topo + "]";
+    }
 }
