@@ -54,4 +54,11 @@ public class FilaService {
         System.out.println(fila.toString());
     }
 
+    public int inicio() {
+        return fila.getInicio();
+    }
+
+    public int fim() {
+        return fila.getFim();
+    }
 }

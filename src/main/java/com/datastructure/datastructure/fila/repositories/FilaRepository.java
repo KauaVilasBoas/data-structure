@@ -32,6 +32,7 @@ public class FilaRepository<T> implements IFIlaRepository<T> {
             throw new RuntimeException("A fila está vazia");
         }
         T elemento = elementos[inicio];
+        elementos[inicio] = null; // Define o elemento como null para remover a referência
         inicio = (inicio + 1) % capacidade;
         tamanho--;
         return elemento;
@@ -56,11 +57,26 @@ public class FilaRepository<T> implements IFIlaRepository<T> {
         return elementos;
     }
 
+    public int getTamanho() {
+        return tamanho;
+    }
+
+    public int getCapacidade() {
+        return capacidade;
+    }
+
+    public int getInicio() {
+        return inicio;
+    }
+
+    public int getFim() {
+        return fim;
+    }
+
     @Override
     public String toString() {
         return "FilaRepository [elementos=" + Arrays.toString(elementos) + ", tamanho=" + tamanho + ", capacidade="
                 + capacidade + ", inicio=" + inicio + ", fim=" + fim + "]";
     }
-   
-    
+
 }

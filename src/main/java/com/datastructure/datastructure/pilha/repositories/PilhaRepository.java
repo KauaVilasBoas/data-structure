@@ -42,5 +42,6 @@ public class PilhaRepository<T> implements IPilha<T> {
 
     public T[] getElementos() {
         return elementos;
-    }
+    }   
+    
 }

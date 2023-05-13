@@ -1,5 +1,8 @@
 package com.datastructure.datastructure.pilha.controllers;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,9 +28,13 @@ public class PilhaController {
     @ResponseBody
     public ResponseEntity<Object> getPilha() throws Exception {
         Integer[] lista = pilhaService.getPilha();
-        // ObjectMapper objectMapper = new ObjectMapper();
-        // String json = objectMapper.writeValueAsString(listaString);
-        return ResponseEntity.ok().body(lista);
+        var topo = pilhaService.getTopo();
+
+        Map<String, Object> response = new HashMap<>();
+        response.put("lista", lista);
+        response.put("topo", topo);
+
+        return ResponseEntity.ok().body(response);
     }
 
     @PostMapping("/push")

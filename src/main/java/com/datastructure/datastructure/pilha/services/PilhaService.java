@@ -49,4 +49,8 @@ public class PilhaService {
         PilhaService.capacidade = capacidade;
         pilha = new PilhaRepository<>(capacidade);
     }
+
+    public int topo() throws Exception {
+       return pilha.topo();
+    }
 }

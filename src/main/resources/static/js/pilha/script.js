@@ -8,6 +8,7 @@ $(document).ready(function () {
 var btnEmpilhar = document.getElementById("btpush");
 var btnDesempilhar = document.getElementById("btpop");
 var btnTamanho = document.getElementById("btcriar");
+var btnAleatorio = document.getElementById("btaleatorio");
 
 btnTamanho.addEventListener("click", function () {
     var tamanhoPilha = document.getElementById("txttamanho").value;
@@ -54,12 +55,30 @@ btnDesempilhar.addEventListener("click", function () {
     });
 });
 
+btnAleatorio.addEventListener("click", function () {
+  
+    var valor = Math.floor(Math.random() * 100);
+
+    $.ajax({
+        url: "/api/pilha/push",
+        type: 'POST',
+        data: JSON.stringify({ valor }),
+        contentType: "application/json",
+        success: function (data, textStatus, xhr) {
+            getPilha();
+        },
+        error: function (error) {
+            alert("Erro: " + error);
+        }
+    });
+});
+
 function getPilha() {
     $.ajax({
         url: "/api/pilha",
         type: 'GET',
         success: function (data, textStatus, xhr) {
-            drawStack(data.length, data);
+            drawStack(data.lista.length, data.lista, data.topo);
         },
         error: function (error) {
             alert("Erro: " + error);
@@ -96,9 +115,9 @@ function drawStack(size, pilhaArray) {
                 )
             );
     }
-    topo = 0;
+    topo = size - 1;
     tamanho = size;
-    $('#s' + topo).html('TOPO &rarr;');
+    $('#s' + topo).html('TOPO →');
 }
 
 function log(msg) {

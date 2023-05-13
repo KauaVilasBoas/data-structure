@@ -3,20 +3,29 @@ var fila = [];
 var tamanho = 0;
 
 $(document).ready(function () {
+
+    getFilaAjax();
+    console.log(fila);
+
     $('#btcriar').click(function () {
+        console.log(fila);
         criarFila();
     });
 
     $('#btenfileirar').click(function () {
+        console.log(fila);
         enfileirar();
     });
 
     $('#btaleatorio').click(function () {
+        console.log(fila);
         enfileirarAleatorio();
     });
 
     $('#btdesenfileirar').click(function () {
+        console.log(fila);
         desenfileirar();
+
     });
 
     $('#btlimpar').click(function () {
@@ -45,7 +54,8 @@ function enfileirar() {
     var valor = parseInt($('#txtvalor').val(), 10);
 
     if (!isNaN(valor)) {
-        if (fila.length < tamanho) {
+        // if (fila.length < tamanho) {
+        if (true) {
             queueAjax(valor);
             // fila.push(valor);
             // drawFila(tamanho);
@@ -59,10 +69,12 @@ function enfileirar() {
 }
 
 function enfileirarAleatorio() {
-    if (fila.length < tamanho) {
+    // if (fila.length < tamanho) {
+    if (true) {
         var valorAleatorio = Math.floor(Math.random() * 100);
-        fila.push(valorAleatorio);
-        drawFila(tamanho);
+        queueAjax(valorAleatorio);
+        // fila.push(valorAleatorio);
+        // drawFila(tamanho);
         log('Valor aleatório ' + valorAleatorio + ' enfileirado com sucesso.');
     } else {
         log('A fila está cheia. Não é possível enfileirar mais valores.');
@@ -70,9 +82,11 @@ function enfileirarAleatorio() {
 }
 
 function desenfileirar() {
-    if (fila.length > 0) {
-        var valorDesenfileirado = fila.shift();
-        drawFila(tamanho);
+    // if (fila.length > 0) {
+    if (true) {
+        unqueueAjax();
+        // var valorDesenfileirado = fila.shift();
+        // drawFila(tamanho);
         log('Valor ' + valorDesenfileirado + ' desenfileirado com sucesso.');
     } else {
         log('A fila está vazia. Não é possível desenfileirar mais valores.');
@@ -85,7 +99,7 @@ function limpar() {
     log('Fila limpa.');
 }
 
-function drawFila(tamanho, fila) {
+function drawFila(tamanho, fila, inicio, fim) {
     var canvas = $('#canvas');
     canvas.empty();
 
@@ -95,10 +109,10 @@ function drawFila(tamanho, fila) {
 
         if (i < fila.length) {
             value = fila[i];
-            if (i === 0) {
+            if (i === inicio) {
                 classValue += ' inicio';
             }
-            if (i === fila.length - 1) {
+            if (i === fim) {
                 classValue += ' fim';
             }
         }
@@ -110,6 +124,10 @@ function drawFila(tamanho, fila) {
 
         canvas.append(item);
     }
+
+    // Atualizar o HTML do início e fim da fila
+    $('#inicio').text('Início: ' + inicio);
+    $('#fim').text('Fim: ' + fim);
 }
 
 function log(message) {
@@ -123,12 +141,12 @@ function getFilaAjax() {
         url: "/api/fila",
         type: 'GET',
         success: function (data, textStatus, xhr) {
-            drawFila(data.length, data);
-            // return data;
+            console.log(data);
+            fila = data.lista;
+            drawFila(data.lista.length, data.lista, data.inicio, data.fim);
         },
         error: function (error) {
             alert("getFilaAjax: Erro: " + error);
-            // return null;
         }
     });
 }

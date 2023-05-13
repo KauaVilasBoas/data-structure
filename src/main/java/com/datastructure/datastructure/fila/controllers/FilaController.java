@@ -1,5 +1,8 @@
 package com.datastructure.datastructure.fila.controllers;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,10 +28,16 @@ public class FilaController {
     @ResponseBody
     public ResponseEntity<Object> getFila() throws Exception {
         Integer[] lista = filaService.getFila();
+        var inicio = filaService.inicio();
+        var fim = filaService.fim();
         System.out.println("GET FILA");
-        // ObjectMapper objectMapper = new ObjectMapper();
-        // String json = objectMapper.writeValueAsString(listaString);
-        return ResponseEntity.ok().body(lista);
+
+        Map<String, Object> response = new HashMap<>();
+        response.put("lista", lista);
+        response.put("inicio", inicio);
+        response.put("fim", fim);
+
+        return ResponseEntity.ok().body(response);
     }
 
     @PostMapping("/queue")
@@ -49,7 +58,7 @@ public class FilaController {
     public ResponseEntity<Object> unqueue() throws Exception {
         System.out.println("unqueue");
 
-        var valor = filaService.desenfileirar(); 
+        var valor = filaService.desenfileirar();
         filaService.exibir();
 
         return ResponseEntity.status(HttpStatus.OK).body(valor);
