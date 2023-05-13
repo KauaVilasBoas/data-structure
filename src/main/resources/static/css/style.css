@@ -1,0 +1,40 @@
+table {
+  border-collapse: collapse;
+  font-size: 120%;
+}
+
+.valor {
+  padding: 4px 6px;
+  width: 2em;
+  text-align: center;
+}
+
+.borda {
+  border: 1px solid black;
+}
+
+.right {
+  text-align: right;
+}
+
+.indice {
+  padding-right: 5px;
+  font-size: 70%;
+}
+
+.campo {
+  width: 4em;
+  text-align: center;
+}
+
+.invalido {
+  color: #ffcece;
+}
+
+#log {
+  height: 10em;
+  width: 60%;
+  overflow: scroll;
+  border: 1px solid black;
+  padding: 4px 6px;
+}

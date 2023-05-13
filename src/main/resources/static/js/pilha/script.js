@@ -1,0 +1,106 @@
+var topo = 0;
+var tamanho = 0;
+
+$(document).ready(function () {
+    getPilha();
+});
+
+var btnEmpilhar = document.getElementById("btpush");
+var btnDesempilhar = document.getElementById("btpop");
+var btnTamanho = document.getElementById("btcriar");
+
+btnTamanho.addEventListener("click", function () {
+    var tamanhoPilha = document.getElementById("txttamanho").value;
+
+    $.ajax({
+        url: "/api/pilha/" + tamanhoPilha,
+        type: 'GET',
+        success: function (data, textStatus, xhr) {
+            getPilha();
+        },
+        error: function (error) {
+            alert("Erro: " + error);
+        }
+    });
+});
+
+btnEmpilhar.addEventListener("click", function () {
+    var valor = document.getElementById("txtvalor").value;
+
+    $.ajax({
+        url: "/api/pilha/push",
+        type: 'POST',
+        data: JSON.stringify({ valor }),
+        contentType: "application/json",
+        success: function (data, textStatus, xhr) {
+            getPilha();
+        },
+        error: function (error) {
+            alert("Erro: " + error);
+        }
+    });
+});
+
+btnDesempilhar.addEventListener("click", function () {
+    $.ajax({
+        url: "/api/pilha/pop",
+        type: 'GET',
+        success: function (data, textStatus, xhr) {
+            getPilha();
+        },
+        error: function (error) {
+            alert("Erro: " + error);
+        }
+    });
+});
+
+function getPilha() {
+    $.ajax({
+        url: "/api/pilha",
+        type: 'GET',
+        success: function (data, textStatus, xhr) {
+            drawStack(data.length, data);
+        },
+        error: function (error) {
+            alert("Erro: " + error);
+        }
+    });
+}
+
+function drawStack(size, pilhaArray) {
+    $("#tpilha").find('tbody')
+        .empty()
+        .append($('<tr>')
+            .append($('<td id="s' + size + '" class="right">')
+                .text('')
+            )
+            .append($('<td id="i' + size + '" class="indice right">')
+                .text(size)
+            )
+            .append($('<td id="v' + size + '" class="valor">')
+                .html('&nbsp;')
+            )
+        );
+    for (var i = size - 1; i >= 0; i--) {
+        var valor = pilhaArray[i];
+        $("#tpilha").find('tbody')
+            .append($('<tr>')
+                .append($('<td id="s' + i + '" class="right">')
+                    .text('')
+                )
+                .append($('<td id="i' + i + '" class="indice right">')
+                    .text(i)
+                )
+                .append($('<td id="v' + i + '" class="valor borda">')
+                    .html(valor)
+                )
+            );
+    }
+    topo = 0;
+    tamanho = size;
+    $('#s' + topo).html('TOPO &rarr;');
+}
+
+function log(msg) {
+    $('#log').html(msg + "<br>" + $('#log').html());
+}
