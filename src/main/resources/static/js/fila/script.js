@@ -94,9 +94,7 @@ function desenfileirar() {
 }
 
 function limpar() {
-    fila = [];
-    drawFila(tamanho);
-    log('Fila limpa.');
+    var log = document.getElementById("log").innerHTML = "";
 }
 
 function drawFila(tamanho, fila, inicio, fim) {

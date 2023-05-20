@@ -9,6 +9,14 @@ var btnEmpilhar = document.getElementById("btpush");
 var btnDesempilhar = document.getElementById("btpop");
 var btnTamanho = document.getElementById("btcriar");
 var btnAleatorio = document.getElementById("btaleatorio");
+var btLimpar = document.getElementById("btlimpar");
+
+btLimpar.addEventListener("click", function () {
+
+    var log = document.getElementById("log").innerHTML = "";
+
+});
+
 
 btnTamanho.addEventListener("click", function () {
     var tamanhoPilha = document.getElementById("txttamanho").value;
