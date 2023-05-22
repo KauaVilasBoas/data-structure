@@ -55,7 +55,7 @@ public class FilaController {
             filaService.enfileirar(queueDTO.valor());
             filaService.exibir();
 
-            return ResponseEntity.status(HttpStatus.CREATED).body("Empilhado com sucesso");
+            return ResponseEntity.status(HttpStatus.CREATED).body("Enfileirado com sucesso");
         } catch (Exception e) {
             return ResponseEntity.badRequest().body("Fila Cheia");
         }
