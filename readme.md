@@ -195,19 +195,19 @@ HTTP/1.1 200 OK
   
 ### Descrição
 
-- Empilha um valor na pilha.
+- Enfileira um valor na fila.
 
 ### Códigos de Resposta
 
 - `201`: Empilhado com sucesso.
 
-- `400`: Pilha Cheia.
+- `400`: Fila Cheia.
 
 ### Exemplo de Requisição
 
-- POST -  /api/pilha/push 
+- POST - api/fila/queue
 - HTTP/1.1
-- Host: example.com 
+- Host: https://data-structure-production.up.railway.app
 - Content-Type: application/json
 
 ```json
@@ -221,7 +221,7 @@ HTTP/1.1 200 OK
 - HTTP/1.1 201 CREATED
 - Content-Type: application/json
 ```json
-    Empilhado com sucesso
+    Enfileirado com sucesso
 ```
   
 </details>
@@ -231,17 +231,18 @@ HTTP/1.1 200 OK
   
 ### Descrição
 
-Retorna a pilha e a posicao do topo da pilha.
+Retorna a fila e a posicao do topo da pilha.
 
 ### Códigos de Resposta
 
-- `200`: Pilha retornado com sucesso.
+- `200`: Fila retornada com sucesso.
+- `400`: Fila vazia.
 
 ### Exemplo de Requisição
 
-- GET - /api/pilha 
+- GET - /api/fila
 - HTTP/1.1
-- Host: example.com
+- Host: https://data-structure-production.up.railway.app
 
 ### Exemplo de Resposta
 
@@ -250,8 +251,9 @@ Retorna a pilha e a posicao do topo da pilha.
 ```json
     {
 	"lista": [],
-	"topo": 0
-    } 
+	"inicio": 0,
+	"fim": 4
+}
 ```
   
 </details>
@@ -261,17 +263,18 @@ Retorna a pilha e a posicao do topo da pilha.
   
 ### Descrição
 
-Desempilha o valor do topo da pilha.
+Desenfileira o valor do inicio da fila e retorna-o como resposta.
 
 ### Códigos de Resposta
 
-- `200`: Desempilhado com sucesso.
+- `200`: 6.
+- `400`: Fila vazia.
 
 ### Exemplo de Requisição
 
-- GET - /api/pilha/pop
+- GET - /api/fila/unqueue
 - HTTP/1.1
-- Host: example.com
+- Host: https://data-structure-production.up.railway.app
 
 ### Exemplo de Resposta
 
@@ -282,33 +285,30 @@ Desempilha o valor do topo da pilha.
 </details>
 
 <details>
-  <summary>SET CAPACIDADE - /api/fila/{tamanho} </summary>
+  <summary>SET CAPACIDADE - /api/fila//{size} </summary>
   
 ### Descrição
 
-Cria uma pilha com a capacidade passada no parametro.
+Cria uma fila com a capacidade passada no parametro.
 
 ## Parâmetros de Entrada
 
-- `tamanho` (obrigatório): Capacidade da pilha.
+- `size` (obrigatório): Capacidade da fila.
 
 ### Códigos de Resposta
 
-- `200`: Pilha criada com sucesso.
+- `200`: 5.
 
 ### Exemplo de Requisição
 
 - GET /api/pilha/5
-- Host: example.com
+- Host: https://data-structure-production.up.railway.app
 
 ### Exemplo de Resposta
 
 HTTP/1.1 200 OK
 
-```json
-    {
-        "5"
-    }    
-```
+	"6"
+
   
 </details>
