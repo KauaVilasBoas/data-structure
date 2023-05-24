@@ -1,8 +1,5 @@
 package com.datastructure.datastructure.pilha.controllers;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -27,46 +24,23 @@ public class PilhaController {
     @GetMapping
     @ResponseBody
     public ResponseEntity<Object> getPilha() throws Exception {
-        try {
-            var lista = pilhaService.getPilha();
-            var topo = pilhaService.getTopo();
-
-            Map<String, Object> response = new HashMap<>();
-            response.put("lista", lista);
-            response.put("topo", topo);
-
-            return ResponseEntity.ok().body(response);
-
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().body("Pilha vazia");
-        }
+        var response = pilhaService.getPilha();
+        return ResponseEntity.ok().body(response);
     }
 
     @PostMapping("/push")
-    public ResponseEntity<Object> push(@RequestBody EmpilharDTO empilharDTO) {
-
-        try {
-
-            if (empilharDTO.valor() == null) {
-                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Digite Corretamente");
-            }
-            pilhaService.push(empilharDTO.valor());
-            return ResponseEntity.status(HttpStatus.CREATED).body("Empilhado com sucesso");
-
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().body("Pilha Cheia");
+    public ResponseEntity<Object> push(@RequestBody EmpilharDTO empilharDTO) throws Exception {
+        if (empilharDTO.valor() == null) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Digite Corretamente");
         }
-
+        pilhaService.push(empilharDTO.valor());
+        return ResponseEntity.status(HttpStatus.CREATED).body("Empilhado com sucesso");
     }
 
     @GetMapping("/pop")
-    public ResponseEntity<Object> pop() {
-        try {
-            var valor = pilhaService.pop();
-            return ResponseEntity.status(HttpStatus.OK).body(valor);
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().body("Pilha vazia");
-        }
+    public ResponseEntity<Object> pop() throws Exception {
+        var valor = pilhaService.pop();
+        return ResponseEntity.status(HttpStatus.OK).body(valor);
     }
 
     @GetMapping("/{size}")

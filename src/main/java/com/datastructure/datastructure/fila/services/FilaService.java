@@ -1,7 +1,12 @@
 package com.datastructure.datastructure.fila.services;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.springframework.stereotype.Service;
 
+import com.datastructure.datastructure.fila.exceptions.EmptyQueueException;
+import com.datastructure.datastructure.fila.exceptions.FullSizeException;
 import com.datastructure.datastructure.fila.repositories.FilaRepository;
 
 @Service
@@ -11,18 +16,18 @@ public class FilaService {
 
     private static FilaRepository<Integer> fila;
 
-    public void enfileirar(Integer elemento) {
+    public void enfileirar(Integer elemento) throws FullSizeException {
         if (fila == null) {
             fila = new FilaRepository<>(capacidade);
         }
         fila.enfileirar(elemento);
     }
 
-    public Integer desenfileirar() {
+    public Integer desenfileirar() throws EmptyQueueException {
         return fila.desenfileirar();
     }
 
-    public Integer primeiro() {
+    public Integer primeiro() throws EmptyQueueException {
         return fila.primeiro();
     }
 
@@ -34,7 +39,7 @@ public class FilaService {
         return fila.tamanho();
     }
 
-    public Integer[] getFila() throws Exception {
+    public Map<String, Object> getFila() throws Exception {
         Object[] elementosGenericos = fila.getElementos();
         Integer[] elementosInteger = new Integer[elementosGenericos.length];
 
@@ -42,7 +47,14 @@ public class FilaService {
             elementosInteger[i] = (Integer) elementosGenericos[i];
         }
 
-        return elementosInteger;
+        var inicio = this.inicio();
+        var fim = this.fim();
+        Map<String, Object> response = new HashMap<>();
+        response.put("lista", elementosInteger);
+        response.put("inicio", inicio);
+        response.put("fim", fim);
+
+        return response;
     }
 
     public static void setCapacidade(int capacidade) {
