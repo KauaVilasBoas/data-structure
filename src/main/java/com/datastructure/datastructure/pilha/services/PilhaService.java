@@ -37,7 +37,7 @@ public class PilhaService {
         return pilha.vazia();
     };
 
-    public Integer[] getPilha() throws Exception {
+    public Map<String, Object> getPilha() throws Exception {
         Object[] elementosGenericos = pilha.getElementos();
         Integer[] elementosInteger = new Integer[elementosGenericos.length];
 
@@ -50,7 +50,7 @@ public class PilhaService {
         response.put("lista", elementosInteger);
         response.put("topo", topo);
 
-        return elementosInteger;
+        return response;
     }
 
     public Object[] getPilha12() throws Exception {
