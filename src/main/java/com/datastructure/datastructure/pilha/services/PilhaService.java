@@ -1,5 +1,8 @@
 package com.datastructure.datastructure.pilha.services;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.springframework.stereotype.Service;
 
 import com.datastructure.datastructure.pilha.repositories.PilhaRepository;
@@ -34,7 +37,7 @@ public class PilhaService {
         return pilha.vazia();
     };
 
-    public Integer[] getPilha() throws Exception {
+    public Map<String, Object> getPilha() throws Exception {
         Object[] elementosGenericos = pilha.getElementos();
         Integer[] elementosInteger = new Integer[elementosGenericos.length];
 
@@ -42,11 +45,16 @@ public class PilhaService {
             elementosInteger[i] = (Integer) elementosGenericos[i];
         }
 
-        return elementosInteger;
+        var topo = this.getTopo();
+        Map<String, Object> response = new HashMap<>();
+        response.put("lista", elementosInteger);
+        response.put("topo", topo);
+
+        return response;
     }
 
     public Object[] getPilha12() throws Exception {
-       return pilha.getElementos();
+        return pilha.getElementos();
     }
 
     public static void setCapacidade(int capacidade) {

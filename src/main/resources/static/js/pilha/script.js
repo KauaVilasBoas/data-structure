@@ -93,6 +93,7 @@ function getPilha() {
         url: "/api/pilha",
         type: 'GET',
         success: function (data, textStatus, xhr) {
+            console.log(data.length);
             drawStack(data.lista.length, data.lista, data.topo);
         },
         error: function (error) {

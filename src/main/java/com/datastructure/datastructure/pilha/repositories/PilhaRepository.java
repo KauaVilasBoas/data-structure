@@ -2,6 +2,9 @@ package com.datastructure.datastructure.pilha.repositories;
 
 import java.util.Arrays;
 
+import com.datastructure.datastructure.pilha.exceptions.EmptyStackException;
+import com.datastructure.datastructure.pilha.exceptions.FullStackException;
+
 public class PilhaRepository<T> implements IPilha<T> {
 
     private T[] elementos;
@@ -14,14 +17,14 @@ public class PilhaRepository<T> implements IPilha<T> {
 
     public void push(T elemento) throws Exception {
         if (topo == elementos.length - 1)
-            throw new Exception("Pilha cheia");
+            throw new FullStackException("Pilha cheia");
         topo++;
         elementos[topo] = elemento;
     }
 
     public T pop() throws Exception {
         if (topo == -1)
-            throw new Exception("Pilha vazia");
+            throw new EmptyStackException("Pilha vazia");
         T elemento = elementos[topo];
         elementos[topo] = null;
         topo--;
@@ -38,7 +41,7 @@ public class PilhaRepository<T> implements IPilha<T> {
 
     public T topo() throws Exception {
         if (topo == -1)
-            throw new Exception("Pilha Vazia");
+            throw new EmptyStackException("Pilha Vazia");
         return elementos[topo];
     }
 

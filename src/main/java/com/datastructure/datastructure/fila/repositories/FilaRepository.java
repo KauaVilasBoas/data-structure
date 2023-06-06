@@ -2,6 +2,9 @@ package com.datastructure.datastructure.fila.repositories;
 
 import java.util.Arrays;
 
+import com.datastructure.datastructure.fila.exceptions.EmptyQueueException;
+import com.datastructure.datastructure.fila.exceptions.FullSizeException;
+
 public class FilaRepository<T> implements IFIlaRepository<T> {
 
     private T[] elementos;
@@ -18,18 +21,18 @@ public class FilaRepository<T> implements IFIlaRepository<T> {
         fim = -1;
     }
 
-    public void enfileirar(T elemento) {
+    public void enfileirar(T elemento) throws FullSizeException {
         if (tamanho == capacidade) {
-            throw new RuntimeException("A fila está cheia");
+            throw new FullSizeException("A fila está cheia");
         }
         fim = (fim + 1) % capacidade;
         elementos[fim] = elemento;
         tamanho++;
     }
 
-    public T desenfileirar() {
+    public T desenfileirar() throws EmptyQueueException {
         if (tamanho == 0) {
-            throw new RuntimeException("A fila está vazia");
+            throw new EmptyQueueException("A fila está vazia");
         }
         T elemento = elementos[inicio];
         elementos[inicio] = null; // Define o elemento como null para remover a referência
@@ -38,9 +41,9 @@ public class FilaRepository<T> implements IFIlaRepository<T> {
         return elemento;
     }
 
-    public T primeiro() {
+    public T primeiro() throws EmptyQueueException {
         if (tamanho == 0) {
-            throw new RuntimeException("A fila está vazia");
+            throw new EmptyQueueException("A fila está vazia");
         }
         return elementos[inicio];
     }
