@@ -1,3 +1,4 @@
+
 $(document).ready(function () {
     listar();
 })
@@ -24,6 +25,9 @@ function inserirInicio() {
 function inserirMeio() {
 
     var posicao = document.getElementById("inserirMeioPosicaoInput").value;
+    var elemento = document.getElementById("inserirMeioInput").value;
+
+    console.log(posicao + " - " + elemento)
 
     fetch("/api/lista/addMeio", {
         method: "POST",
@@ -31,7 +35,8 @@ function inserirMeio() {
             "Content-Type": "application/json"
         },
         body: JSON.stringify({
-            valor: valor
+            elemento: elemento,
+            posicao: posicao
         })
     })
         .then(function (response) {
@@ -92,46 +97,52 @@ function listar() {
             var listaElement = document.getElementById("lista");
             listaElement.innerHTML = "";
 
-            var lista = data.lista.split(", "); // Converte a string em um array
+            var listaArray = JSON.parse(data.lista);
 
-            // Cria a tabela
             var table = document.createElement("table");
             table.classList.add("lista-table");
 
-            // Cabeçalho da tabela
-            var thead = document.createElement("thead");
-            var headerRow = document.createElement("tr");
-            var headerCell = document.createElement("th");
-            headerCell.textContent = "Elemento";
-            headerRow.appendChild(headerCell);
-            thead.appendChild(headerRow);
-            table.appendChild(thead);
-
-            // Corpo da tabela
             var tbody = document.createElement("tbody");
 
-            // Loop para criar as linhas da tabela
-            for (var i = 0; i < lista.length; i++) {
-                var row = document.createElement("tr");
+            var tr = document.createElement("tr");
 
-                // Célula com o elemento da lista
-                var elementCell = document.createElement("td");
-                elementCell.textContent = lista[i];
-                row.appendChild(elementCell);
+            var thNo = document.createElement("th");
+            thNo.innerText = "No";
 
-                // Célula com a seta (se houver próximo elemento)
-                if (i < lista.length - 1) {
-                    var arrowCell = document.createElement("td");
-                    arrowCell.innerHTML = "&#8594;"; // Seta para a direita
-                    row.appendChild(arrowCell);
-                }
+            var thValor = document.createElement("th");
+            thValor.innerText = "Valor";
 
-                tbody.appendChild(row);
+            var thProximo = document.createElement("th");
+            thProximo.innerText = "Próxima";
+
+            tr.appendChild(thNo);
+            tr.appendChild(thValor);
+            tr.appendChild(thProximo);
+
+            tbody.appendChild(tr);
+
+            for (var i = 0; i < listaArray.length; i++) {
+                var tr = document.createElement("tr");
+
+                var tdNo = document.createElement("td");
+                tdNo.innerText = i;
+
+                var tdValor = document.createElement("td");
+                tdValor.innerText = listaArray[i];
+
+                var tdProximo = document.createElement("td");
+                tdProximo.innerText = i < listaArray.length - 1 ? i + 1 : "-";
+
+                tdProximo.classList.add("arrow-cell");
+
+                tr.appendChild(tdNo);
+                tr.appendChild(tdValor);
+                tr.appendChild(tdProximo);
+
+                tbody.appendChild(tr);
             }
 
             table.appendChild(tbody);
             listaElement.appendChild(table);
         });
 }
-
-
