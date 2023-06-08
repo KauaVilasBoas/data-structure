@@ -67,17 +67,20 @@
 
         .lista-table th,
         .lista-table td {
-            padding: 8px;
+            padding: 10px;
             text-align: left;
         }
 
         .lista-table th {
-            background-color: #f2f2f2;
+            background-color: #007bff;
+            color: #fff;
             font-weight: bold;
+            font-size: 16px;
         }
 
         .lista-table td {
             border-top: 1px solid #ddd;
+            font-size: 14px;
         }
 
         .lista-table td:last-child {
@@ -87,6 +90,18 @@
         .lista-table td.arrow-cell {
             font-size: 24px;
             color: #666;
+        }
+
+        .lista-table tr td:first-child {
+            white-space: nowrap;
+            width: 1%;
+        }
+
+        .lista-table tr td:not(:first-child):before {
+            content: '\2192';
+            display: inline-block;
+            margin-right: 5px;
+            transform: translateY(-2px);
         }
     </style>
 </head>
@@ -108,7 +123,7 @@
             <input type="number" class="form-control" id="inserirMeioPosicaoInput" placeholder="Posicao">
             <input type="number" class="form-control" id="inserirMeioInput">
             <div class="input-group-append">
-                <button class="btn btn-primary" onclick="inserirInicio()">Inserir</button>
+                <button class="btn btn-primary" onclick="inserirMeio()">Inserir</button>
             </div>
         </div>
 
