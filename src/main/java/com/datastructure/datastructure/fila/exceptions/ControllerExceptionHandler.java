@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
-@RestControllerAdvice(basePackages = "package com.datastructure.datastructure.fila.controllers")
+@RestControllerAdvice(basePackages = "com.datastructure.datastructure.fila.controllers")
 public class ControllerExceptionHandler {
     
     @ExceptionHandler(value = {FullSizeException.class})
