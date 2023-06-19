@@ -616,3 +616,12 @@ Desenfileira o valor do inicio da fila e retorna-o como resposta.
     6   
 ```
 </details>
+
+![Screenshot from 2023-06-18 23-44-16](https://github.com/diogoribeiro1/data-structure/assets/89152312/db7e7c0b-377a-4dc5-9186-8bf337d8eb60)
+![Screenshot from 2023-06-18 23-44-25](https://github.com/diogoribeiro1/data-structure/assets/89152312/fb529f57-2af8-4554-95e8-d2c93620dabb)
+![Screenshot from 2023-06-18 23-44-29](https://github.com/diogoribeiro1/data-structure/assets/89152312/112cfd1f-dcc3-4b73-8f8b-88bddadeeec7)
+![Screenshot from 2023-06-18 23-44-34](https://github.com/diogoribeiro1/data-structure/assets/89152312/8ffd5e38-b63c-47ff-98ba-50816d7440e7)
+![Screenshot from 2023-06-18 23-44-57](https://github.com/diogoribeiro1/data-structure/assets/89152312/d96859ce-6618-4a73-8e7a-226730b80d37)
+
+
+
