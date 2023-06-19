@@ -316,3 +316,303 @@ HTTP/1.1 200 OK
 
   
 </details>
+
+
+## Lista Ligada
+
+|   Endpoints   |  Query Parameters  |    Verb    |
+| :---          |     :---:          |       ---: |
+| /api/lista/addMeio       |   *        |     POST   |
+| /api/lista/addFim      |   *        |     POST   |
+| /api/lista/addInicio       |   *        |     POST   |
+| /api/lista/removerInicio     |           *        |     DELETE |
+| /api/lista/removerFim       | *        |     DELETE |
+| /api/lista/listarLista   |   *        |     GET    |
+
+<details>
+  <summary>Adcionar no Meio - /api/lista/addMeio </summary>
+  
+### Descrição
+
+- Enfileira um valor na fila.
+
+### Códigos de Resposta
+
+- `201`: Enfileirado com sucesso.
+
+- `400`: Fila Cheia.
+
+### Exemplo de Requisição
+
+- POST - api/fila/queue
+- HTTP/1.1
+- Host: https://data-structure-production.up.railway.app
+- Content-Type: application/json
+
+```json
+    {
+        "valor":"3"
+    }    
+```
+
+### Exemplo de Resposta
+
+- HTTP/1.1 201 CREATED
+- Content-Type: application/json
+```json
+    Enfileirado com sucesso
+```
+  
+</details>
+
+<details>
+  <summary>Adcionar no Inicio - /api/lista/addInicio </summary>
+  
+### Descrição
+
+Retorna a fila e a posicao do topo da pilha.
+
+### Códigos de Resposta
+
+- `200`: Fila retornada com sucesso.
+- `400`: Fila vazia.
+
+### Exemplo de Requisição
+
+- GET - /api/fila
+- HTTP/1.1
+- Host: https://data-structure-production.up.railway.app
+
+### Exemplo de Resposta
+
+- HTTP/1.1 200 OK
+- Content-Type: application/json
+```json
+    {
+	"lista": [],
+	"inicio": 0,
+	"fim": 4
+}
+```
+  
+</details>
+
+<details>
+  <summary>Adcionar no Fim - /api/lista/addFim </summary>
+  
+### Descrição
+
+Desenfileira o valor do inicio da fila e retorna-o como resposta.
+
+### Códigos de Resposta
+
+- `200`: 6.
+- `400`: Fila vazia.
+
+### Exemplo de Requisição
+
+- GET - /api/fila/unqueue
+- HTTP/1.1
+- Host: https://data-structure-production.up.railway.app
+
+### Exemplo de Resposta
+
+- HTTP/1.1 - 200 OK
+```json
+    6   
+```
+</details>
+
+<details>
+  <summary>Remover Inicio - /api/lista/removerInicio </summary>
+  
+### Descrição
+
+Cria uma fila com a capacidade passada no parametro.
+
+## Parâmetros de Entrada
+
+- `size` (obrigatório): Capacidade da fila.
+
+### Códigos de Resposta
+
+- `200`: 5.
+
+### Exemplo de Requisição
+
+- GET /api/pilha/5
+- Host: https://data-structure-production.up.railway.app
+
+### Exemplo de Resposta
+
+HTTP/1.1 200 OK
+
+	"6"
+  
+</details>
+
+<details>
+  <summary>Remover no Fim - /api/lista/removerFim </summary>
+  
+### Descrição
+
+- Enfileira um valor na fila.
+
+### Códigos de Resposta
+
+- `201`: Enfileirado com sucesso.
+
+- `400`: Fila Cheia.
+
+### Exemplo de Requisição
+
+- POST - api/fila/queue
+- HTTP/1.1
+- Host: https://data-structure-production.up.railway.app
+- Content-Type: application/json
+
+```json
+    {
+        "valor":"3"
+    }    
+```
+
+### Exemplo de Resposta
+
+- HTTP/1.1 201 CREATED
+- Content-Type: application/json
+```json
+    Enfileirado com sucesso
+```
+  
+</details>
+
+<details>
+  <summary>GET Lista - /api/lista/listarLista </summary>
+  
+### Descrição
+
+Cria uma fila com a capacidade passada no parametro.
+
+## Parâmetros de Entrada
+
+- `size` (obrigatório): Capacidade da fila.
+
+### Códigos de Resposta
+
+- `200`: 5.
+
+### Exemplo de Requisição
+
+- GET /api/pilha/5
+- Host: https://data-structure-production.up.railway.app
+
+### Exemplo de Resposta
+
+HTTP/1.1 200 OK
+
+	"6"
+  
+</details>
+
+## Arvore
+
+|   Endpoints   |  Query Parameters  |    Verb    |
+| :---          |     :---:          |       ---: |
+| /api/tree     |   *                |     GET    |
+| /api/tree/add |           *        |     POST   |
+| /api/tree/remove  | *              |     DELETE |
+
+<details>
+  <summary>Get arvore - /api/tree </summary>
+  
+### Descrição
+
+- Enfileira um valor na fila.
+
+### Códigos de Resposta
+
+- `201`: Enfileirado com sucesso.
+
+- `400`: Fila Cheia.
+
+### Exemplo de Requisição
+
+- POST - api/fila/queue
+- HTTP/1.1
+- Host: https://data-structure-production.up.railway.app
+- Content-Type: application/json
+
+```json
+    {
+        "valor":"3"
+    }    
+```
+
+### Exemplo de Resposta
+
+- HTTP/1.1 201 CREATED
+- Content-Type: application/json
+```json
+    Enfileirado com sucesso
+```
+  
+</details>
+
+<details>
+  <summary>Adicionar - /api/tree/add </summary>
+  
+### Descrição
+
+Retorna a fila e a posicao do topo da pilha.
+
+### Códigos de Resposta
+
+- `200`: Fila retornada com sucesso.
+- `400`: Fila vazia.
+
+### Exemplo de Requisição
+
+- GET - /api/fila
+- HTTP/1.1
+- Host: https://data-structure-production.up.railway.app
+
+### Exemplo de Resposta
+
+- HTTP/1.1 200 OK
+- Content-Type: application/json
+```json
+    {
+	"lista": [],
+	"inicio": 0,
+	"fim": 4
+}
+```
+  
+</details>
+
+<details>
+  <summary>Remover - /api/tree/remove </summary>
+  
+### Descrição
+
+Desenfileira o valor do inicio da fila e retorna-o como resposta.
+
+### Códigos de Resposta
+
+- `200`: 6.
+- `400`: Fila vazia.
+
+### Exemplo de Requisição
+
+- GET - /api/fila/unqueue
+- HTTP/1.1
+- Host: https://data-structure-production.up.railway.app
+
+### Exemplo de Resposta
+
+- HTTP/1.1 - 200 OK
+```json
+    6   
+```
+</details>

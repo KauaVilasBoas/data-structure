@@ -52,7 +52,7 @@ function removeAjax(valor) {
     })
         .then(function (response) {
             if (response.ok) {
-                // listar();
+                listar();
             }
         });
 }
@@ -133,7 +133,6 @@ function removeValue() {
     const value = parseInt(document.getElementById("txtvalor").value);
     if (!isNaN(value)) {
         removeAjax(value);
-        listar();
     }
     document.getElementById("valueInput").value = "";
 }
