@@ -1,6 +1,6 @@
-# Data Structure - Pilha e Fila
+# Data Structure - Pilha, Fila, Lista Ligada e Arvore
 
-Este é um projeto que implementa uma simulacão de como funciona uma pilha e uma fila em estrutura de dados, pra desenvolver as funcionalidades da pilha, foi usado java e spring para o backend e no frontend foi utilizado bootstrap e ajax com jquery.
+Este é um projeto que implementa uma simulacão de como funciona uma pilha, fila, lista e arvore em estrutura de dados, pra desenvolver as funcionalidades da pilha, foi usado java e spring para o backend e no frontend foi utilizado bootstrap e ajax com jquery.
 
 ## Teste em Produção
 
@@ -27,6 +27,17 @@ https://data-structure-production-a118.up.railway.app/index.html
 - Mudar tamanho da fila;
 - Efileirar;
 - Desenfileirar;
+- Criar Lista Ligada
+- Inserir no meio da Lista
+- Inserir no fim da Lista
+- Inserir no inicio da Lista
+- Remover no inicio da Lista
+- Inserir no fim da Lista
+- Buscar Lista
+- Criar Arvore
+- Adicionar valor da Arvore
+- Remover valor da Arvore
+- Buscar Arvore
 
 ## Configure e execute
 
